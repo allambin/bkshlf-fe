@@ -13,7 +13,7 @@ interface FormState {
 const Login: React.FC = () => {
   const [formData, setFormData] = useState<FormState>({ email: '', password: '' });
   const [error, setError] = useState<string | null>(null);
-  const { saveToken } = useAuth();
+  //const { saveToken } = useAuth();
   const navigate = useNavigate();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -24,9 +24,10 @@ const Login: React.FC = () => {
     e.preventDefault();
     try {
       const data = await login(formData);
-      saveToken(data.accessToken);
-      setAuthToken(data.accessToken);
-      navigate('/');
+      localStorage.setItem('token', data.accessToken);
+      //saveToken(data.accessToken);
+      //setAuthToken(data.accessToken);
+      navigate('/books/show/860316e2-0f9b-11ef-87e0-5056c2c79fc9');
     } catch (err) {
       setError('Login failed');
     }

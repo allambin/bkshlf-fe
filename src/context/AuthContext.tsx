@@ -1,10 +1,9 @@
-// src/context/AuthContext.tsx
-import React, { createContext, useState, ReactNode, FC, useContext } from 'react';
+import React, { createContext, useState, ReactNode, FC, useContext, useEffect } from 'react';
 
 // Define the shape of the authentication context
 interface AuthContextType {
   isLoggedIn: boolean;
-  saveToken: () => void;
+  //saveToken: () => void;
   logout: () => void;
   token: string|null;
 }
@@ -20,7 +19,15 @@ interface AuthProviderProps {
 // AuthProvider component to wrap around the application
 const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   // const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-  const [token, setToken] = useState<string | null>(null);
+  const [token, setToken] = useState<string | null>(localStorage.getItem('token'));
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem('token');
+    if (storedToken) {
+      setToken(storedToken);
+    }
+  }, []); // Empty dependency array ensures this effect runs only once on mount
+
 
   const saveToken = (token: string) => { // todo rename
     setToken(token);
@@ -31,7 +38,7 @@ const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn: !!token, saveToken, logout, token }}>
+    <AuthContext.Provider value={{ isLoggedIn: !!token, logout, token }}>
       {children}
     </AuthContext.Provider>
   );
