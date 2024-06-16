@@ -1,8 +1,10 @@
 import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { getLibrary } from "../../api/library";
+import { Link } from "react-router-dom";
+import { Book } from "../../types";
 
 
-const Index: React.FC = () => { // todo rename
+const Library: React.FC = () => { // todo rename
   const [libraryData, setLibraryData] = useState<any>(null);
 
   useEffect(() => {
@@ -20,10 +22,16 @@ const Index: React.FC = () => { // todo rename
 
   return (
     <div>
-      <h1>Library Data</h1>
-      <pre>{JSON.stringify(libraryData, null, 2)}</pre>
+      <h1>Library</h1>
+      {libraryData && (
+        <ul>
+          {libraryData.books.map((book: Book) => (
+            <li><Link to={`/books/show/${book.id}`}>{ book.title }</Link></li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
 
-export default Index;
+export default Library;

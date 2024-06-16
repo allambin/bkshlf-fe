@@ -5,7 +5,8 @@ interface AuthContextType {
   isLoggedIn: boolean;
   //saveToken: () => void;
   logout: () => void;
-  token: string|null;
+  login: (token: string) => void;
+  // token: string|null;
 }
 
 // Create the context with a default value
@@ -18,27 +19,28 @@ interface AuthProviderProps {
 
 // AuthProvider component to wrap around the application
 const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
-  // const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-  const [token, setToken] = useState<string | null>(localStorage.getItem('token'));
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(!!localStorage.getItem('token'));
 
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
     if (storedToken) {
-      setToken(storedToken);
+      setIsLoggedIn(true);
     }
   }, []); // Empty dependency array ensures this effect runs only once on mount
 
 
-  const saveToken = (token: string) => { // todo rename
-    setToken(token);
+  const login = (token: string) => {
+    localStorage.setItem('token', token);
+    setIsLoggedIn(true);
   };
 
   const logout = () => {
-    setToken(null);
+    localStorage.removeItem('token');
+    setIsLoggedIn(false);
   };
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn: !!token, logout, token }}>
+    <AuthContext.Provider value={{ isLoggedIn, logout, login }}>
       {children}
     </AuthContext.Provider>
   );

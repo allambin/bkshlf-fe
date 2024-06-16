@@ -1,6 +1,6 @@
 // src/components/Auth/Login.jsx
 import React, { useState, useContext, ChangeEvent, FormEvent } from 'react';
-import { login } from '../../api/auth';
+import { login as loginCall } from '../../api/auth';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { setAuthToken } from '../../api/api';
@@ -13,7 +13,7 @@ interface FormState {
 const Login: React.FC = () => {
   const [formData, setFormData] = useState<FormState>({ email: '', password: '' });
   const [error, setError] = useState<string | null>(null);
-  //const { saveToken } = useAuth();
+  const { login } = useAuth();
   const navigate = useNavigate();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -23,11 +23,9 @@ const Login: React.FC = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const data = await login(formData);
-      localStorage.setItem('token', data.accessToken);
-      //saveToken(data.accessToken);
-      //setAuthToken(data.accessToken);
-      navigate('/books/show/860316e2-0f9b-11ef-87e0-5056c2c79fc9');
+      const data = await loginCall(formData);
+      login(data.accessToken);
+      navigate('/');
     } catch (err) {
       setError('Login failed');
     }
