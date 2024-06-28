@@ -1,5 +1,5 @@
-import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
-import { getLibrary } from "../../api/library";
+import React, { useEffect, useState } from "react";
+import { getBooks } from "../../api/books";
 import { Link } from "react-router-dom";
 import { Book } from "../../types";
 
@@ -10,7 +10,7 @@ const Library: React.FC = () => { // todo rename
   useEffect(() => {
     const fetchLibrary = async () => {
       try {
-        const data = await getLibrary();
+        const data = await getBooks();
         setLibraryData(data);
       } catch (err) {
         console.error('Error fetching library data:', err);

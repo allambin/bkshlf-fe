@@ -3,15 +3,15 @@ import api from './api';
 
 // todo rename!
 
-const API_URL = "http://localhost:8080";
+const API_URL = "http://localhost:8080/api";
 
 interface ReviewData {
   content: String;
 }
 
-export const getLibrary = async (): Promise<any> => {
+export const getBooks = async (): Promise<any> => {
   try {
-    const response = await api.get(`${API_URL}/library`);
+    const response = await api.get(`${API_URL}/books`);
     return response.data;
   } catch (error) {
     throw error;
@@ -21,7 +21,7 @@ export const getLibrary = async (): Promise<any> => {
 export const getBook = async (id: String): Promise<Book> => {
   try {
     const response = await api.get(`${API_URL}/books/${id}`);
-    return response.data as Book;
+    return response.data.book as Book;
   } catch (error) {
     throw error;
   }

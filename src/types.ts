@@ -18,6 +18,7 @@ export interface Review {
 export interface Author {
   id: string;
   name: string;
+  books: Book[];
 }
 
 export interface Edition {
@@ -40,6 +41,8 @@ export interface Book {
 
 export interface ReviewsResponse {
   reviews: Review[];
-  average_rating: number;
-  total_reviews: number; // rename total?
+  meta: {
+    average_rating: number,
+    total_reviews: number
+  }
 }

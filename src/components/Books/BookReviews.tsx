@@ -1,7 +1,7 @@
 import React, { useEffect, useState, FormEvent, ChangeEvent } from "react";
 import { useParams } from 'react-router-dom';
-import { getBookReviews, postBookReview } from "../../api/library";
-import { Review, ReviewsResponse } from "../../types";
+import { getBookReviews, postBookReview } from "../../api/books";
+import { ReviewsResponse } from "../../types";
 import BookReview from "./BookReview";
 import { useAuth } from "../../context/AuthContext";
 
@@ -29,7 +29,7 @@ const BookReviews: React.FC<BookReviewsProps> = ({ onReviewData }) => {
     try {
       if (id) {
         await postBookReview(id, formData);
-        await fetchBookReviews(id);
+        fetchBookReviews(id);
       }
     } catch (err) {
       setError('Review failed');
@@ -38,9 +38,9 @@ const BookReviews: React.FC<BookReviewsProps> = ({ onReviewData }) => {
 
   const fetchBookReviews = async (id: string) => {
     try {
-      const data: ReviewsResponse = await getBookReviews(id);
+      const data: ReviewsResponse = await getBookReviews(id); // todo rename data
       setData(data);
-      onReviewData(data.average_rating, data.total_reviews);
+      onReviewData(data.meta.average_rating, data.meta.total_reviews);
     } catch (err) {
       console.error('Error fetching book reviews data:', err);
     }
@@ -60,8 +60,8 @@ const BookReviews: React.FC<BookReviewsProps> = ({ onReviewData }) => {
             <BookReview key={review.id} review={review} />
           ))}
           <div>
-            <p>Average Rating: {data.average_rating}</p>
-            <p>Total Reviews: {data.total_reviews}</p>
+            <p>Average Rating: {data.meta.average_rating}</p>
+            <p>Total Reviews: {data.meta.total_reviews}</p>
           </div>
         </>
       )}
