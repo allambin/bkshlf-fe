@@ -1,30 +1,40 @@
-# React + TypeScript + Vite
+# BKSHLF Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
 
-Currently, two official plugins are available:
+This project is the **frontend** for the BKSHLF project, built using **React.js**. It works in tandem with the backend built with **Java** and **Spring Boot**. The main purpose of this project is to serve as a learning exercise to deepen my understanding of React and frontend development practices. **Please note that this project is not intended to be a fully functional or complete application.**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Purpose
 
-## Expanding the ESLint configuration
+The primary goals of this project are to:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Learn and practice React.js for frontend development.
+- Understand component-based architecture and state management in React.
+- Gain experience in integrating a React frontend with a RESTful API backend.
+- Explore the basics of modern frontend development, including routing, forms, and user interactions.
 
-- Configure the top-level `parserOptions` property like this:
+## Features
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+- Basic user interface for interacting with BKSHLF.
+- Integration with the backend for fetching and displaying data.
+- Simple routing for navigating between different views/pages.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Disclaimer
+
+This project is a **work in progress** and will **never be completed**. It is not meant to be a production-ready application or a comprehensive frontend for the Goodreads API. As such, you may find incomplete features, minimal styling, and other limitations.
+
+## Setup
+
+To run this project locally:
+
+1. Clone the repository.
+2. Install the dependencies with `npm install`.
+3. Start the development server with `npm start`.
+4. Ensure the backend is running to see full functionality.
+
+## Acknowledgements
+
+- This project is inspired by [Goodreads](https://www.goodreads.com/), but it is purely for educational purposes.
+- I would like to thank the open-source community and contributors to React.js and related projects for their invaluable resources and tools.
+
+**Thank you for understanding the purpose of this project.**
